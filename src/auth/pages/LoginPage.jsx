@@ -1,14 +1,16 @@
 import { Google } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography, Link } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { singInWithGoogle } from "../../firebase/provider";
 import { useForm } from "../../hooks/useForm";
+import { startGoogleSingIn } from "../../store/auth/thunks";
 const initalState = {
   email: "",
   password: "",
 };
 export const LoginPage = ({}) => {
   const { email, password, onInputChange, formState } = useForm(initalState);
+  const dispatch = useDispatch();
 
   const onLogin = (e) => {
     e.preventDefault();
@@ -16,8 +18,7 @@ export const LoginPage = ({}) => {
   };
 
   const onGoole = async (e) => {
-    const resp = await singInWithGoogle();
-    console.log(resp);
+    dispatch(startGoogleSingIn());
   };
 
   return (
