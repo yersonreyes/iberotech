@@ -1,6 +1,7 @@
 import { Google } from "@mui/icons-material";
 import { Button, Grid, TextField, Typography, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { singInWithGoogle } from "../../firebase/provider";
 import { useForm } from "../../hooks/useForm";
 const initalState = {
   email: "",
@@ -14,8 +15,9 @@ export const LoginPage = ({}) => {
     console.log(formState);
   };
 
-  const onGoole = (e) => {
-    console.log(google);
+  const onGoole = async (e) => {
+    const resp = await singInWithGoogle();
+    console.log(resp);
   };
 
   return (
