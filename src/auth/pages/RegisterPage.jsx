@@ -1,7 +1,19 @@
 import { Button, Grid, TextField, Typography, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
+const initalState = {
+  email: "",
+  password1: "",
+  password2: "",
+};
 export const RegisterPage = () => {
+  const { email, password1, password2, onInputChange, formState } =
+    useForm(initalState);
+  const onRegister = (e) => {
+    e.preventDefault();
+    console.log(formState);
+  };
   return (
     <Grid
       container
@@ -25,7 +37,7 @@ export const RegisterPage = () => {
         <Typography variant="h5" sx={{ mb: 1 }}>
           Registrate
         </Typography>
-        <form action="">
+        <form onSubmit={onRegister}>
           <Grid container>
             <Grid item xs={12} sx={{ mt: 2 }}>
               <TextField
@@ -34,25 +46,31 @@ export const RegisterPage = () => {
                 placeholder="correo@correo.com"
                 fullWidth
                 name="email"
+                value={email}
+                onChange={onInputChange}
               />
             </Grid>
             <Grid item xs={12} sx={{ mt: 2 }}>
               <TextField
                 label="Contraseña"
                 type="password"
-                placeholder="contraseña"
+                placeholder="Contraseña"
                 fullWidth
-                name="password"
+                name="password1"
+                value={password1}
+                onChange={onInputChange}
               />
             </Grid>
 
             <Grid item xs={12} sx={{ mt: 2 }}>
               <TextField
-                label="Contraseña"
+                label="Repita su contraseña"
                 type="password"
-                placeholder="contraseña"
+                placeholder="Repita su contraseña"
                 fullWidth
-                name="password"
+                name="password2"
+                value={password2}
+                onChange={onInputChange}
               />
             </Grid>
 
