@@ -3,7 +3,10 @@ import { Button, Grid, TextField, Typography, Link } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
-import { startGoogleSingIn } from "../../store/auth/thunks";
+import {
+  startGoogleSingIn,
+  startLoginWithEmailPassword,
+} from "../../store/auth/thunks";
 const initalState = {
   email: "",
   password: "",
@@ -14,7 +17,7 @@ export const LoginPage = ({}) => {
 
   const onLogin = (e) => {
     e.preventDefault();
-    console.log(formState);
+    dispatch(startLoginWithEmailPassword({ email, password }));
   };
 
   const onGoole = async (e) => {
