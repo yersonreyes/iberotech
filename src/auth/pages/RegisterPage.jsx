@@ -1,18 +1,30 @@
 import { Button, Grid, TextField, Typography, Link } from "@mui/material";
+import { useDispatch } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
+import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks";
 
 const initalState = {
+  displayName: "",
   email: "",
   password1: "",
   password2: "",
 };
 export const RegisterPage = () => {
-  const { email, password1, password2, onInputChange, formState } =
+  const { displayName, email, password1, password2, onInputChange, formState } =
     useForm(initalState);
+
+  const dispatch = useDispatch();
+
   const onRegister = (e) => {
     e.preventDefault();
-    console.log(formState);
+    dispatch(
+      startCreatingUserWithEmailPassword({
+        displayName,
+        email,
+        password: password1,
+      })
+    );
   };
   return (
     <Grid
@@ -39,6 +51,17 @@ export const RegisterPage = () => {
         </Typography>
         <form onSubmit={onRegister}>
           <Grid container>
+            <Grid item xs={12} sx={{ mt: 2 }}>
+              <TextField
+                label="Usuario"
+                type="text"
+                placeholder="Usuario"
+                fullWidth
+                name="displayName"
+                value={displayName}
+                onChange={onInputChange}
+              />
+            </Grid>
             <Grid item xs={12} sx={{ mt: 2 }}>
               <TextField
                 label="Correo"
