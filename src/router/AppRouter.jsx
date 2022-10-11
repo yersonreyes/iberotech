@@ -2,10 +2,11 @@ import { useSelector } from "react-redux";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
 import { DashboardRoutes } from "../dashboard/routes/DashboardRoutes";
+import { useCheckAuth } from "../hooks/useCheckAuth";
 import { CheckingAuth } from "../ui/CheckingAuth";
 
 export const AppRouter = () => {
-  const { status } = useSelector((state) => state.auth);
+  const { status } = useCheckAuth();
   if (status === "checking") {
     return <CheckingAuth />;
   }

@@ -45,6 +45,6 @@ export const startCreatingUserWithEmailPassword = ({
 export const startLogout = () => {
   return async (dispatch) => {
     await logoutFirebase();
-    dispatch(logout({}));
+    dispatch(logout());
   };
 };
