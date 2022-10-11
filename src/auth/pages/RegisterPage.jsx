@@ -1,5 +1,12 @@
-import { Button, Grid, TextField, Typography, Link } from "@mui/material";
-import { useDispatch } from "react-redux";
+import {
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  Link,
+  Alert,
+} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
 import { startCreatingUserWithEmailPassword } from "../../store/auth/thunks";
@@ -14,6 +21,7 @@ export const RegisterPage = () => {
   const { displayName, email, password1, password2, onInputChange, formState } =
     useForm(initalState);
 
+  const { errorMesage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const onRegister = (e) => {
@@ -96,6 +104,13 @@ export const RegisterPage = () => {
                 onChange={onInputChange}
               />
             </Grid>
+            {errorMesage ? (
+              <Grid sx={{ mt: 1, width: "100%" }}>
+                <Alert severity="error">{errorMesage}</Alert>
+              </Grid>
+            ) : (
+              <></>
+            )}
 
             <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
               <Grid item xs={12}>

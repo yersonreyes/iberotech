@@ -75,6 +75,21 @@ export const registerUserWithEmailPassword = async ({
     };
   } catch (error) {
     const errorMesage = error.message;
+
+    if (errorMesage === "Firebase: Error (auth/email-already-in-use).") {
+      return {
+        ok: false,
+        errorMesage: "El correo ya esta en uso",
+      };
+    } else if (
+      errorMesage ===
+      "Firebase: Password should be at least 6 characters (auth/weak-password)."
+    ) {
+      return {
+        ok: false,
+        errorMesage: "La contraseña debe tener mas de 6 caracteres",
+      };
+    }
     return {
       ok: false,
       errorMesage,
