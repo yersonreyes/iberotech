@@ -27,6 +27,7 @@ export const RegisterPage = () => {
   const dispatch = useDispatch();
 
   const onRegister = (e) => {
+    setErrorpassword(false);
     e.preventDefault();
     if (password1 != password2) {
       setErrorpassword(true);
