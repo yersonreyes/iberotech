@@ -6,6 +6,7 @@ import {
   Link,
   Alert,
 } from "@mui/material";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
 import { useForm } from "../../hooks/useForm";
@@ -18,6 +19,7 @@ const initalState = {
   password2: "",
 };
 export const RegisterPage = () => {
+  const [errorpassword, setErrorpassword] = useState(false);
   const { displayName, email, password1, password2, onInputChange, formState } =
     useForm(initalState);
 
@@ -26,6 +28,10 @@ export const RegisterPage = () => {
 
   const onRegister = (e) => {
     e.preventDefault();
+    if (password1 != password2) {
+      setErrorpassword(true);
+      return;
+    }
     dispatch(
       startCreatingUserWithEmailPassword({
         displayName,
@@ -104,9 +110,11 @@ export const RegisterPage = () => {
                 onChange={onInputChange}
               />
             </Grid>
-            {errorMesage ? (
+            {errorMesage || errorpassword ? (
               <Grid sx={{ mt: 1, width: "100%" }}>
-                <Alert severity="error">{errorMesage}</Alert>
+                <Alert severity="error">
+                  {errorpassword ? "Las contraseñas no cionciden" : errorMesage}
+                </Alert>
               </Grid>
             ) : (
               <></>
