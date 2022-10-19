@@ -7,8 +7,13 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export const CardTiket = ({ state, title, date, description, user, id }) => {
+  const navigate = useNavigate();
+  const onNavigate = (nav) => {
+    navigate(`/tiket/${nav}`);
+  };
   return (
     <Card sx={{ Width: "100%", marginTop: "1rem" }}>
       {state === "new" ? (
@@ -30,7 +35,9 @@ export const CardTiket = ({ state, title, date, description, user, id }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Ver</Button>
+        <Button onClick={() => onNavigate(11111)} size="small">
+          Ver
+        </Button>
       </CardActions>
     </Card>
   );
