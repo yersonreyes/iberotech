@@ -35,7 +35,7 @@ export const CardTiket = ({ state, title, date, description, user, id }) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button onClick={() => onNavigate(11111)} size="small">
+        <Button onClick={() => onNavigate(id)} size="small">
           Ver
         </Button>
       </CardActions>

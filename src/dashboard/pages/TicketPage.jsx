@@ -1,6 +1,6 @@
 import { Button, Container, Grid } from "@mui/material";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { startGetTickets } from "../../store/ticket/thunks";
 
@@ -11,11 +11,13 @@ export const TicketPage = () => {
   useEffect(() => {
     dispatch(startGetTickets());
   }, []);
+  const tickets = useSelector((state) => state.ticket.tickets);
 
   const navigate = useNavigate();
   const onNavigate = () => {
     navigate(`/ticket/new`);
   };
+
   return (
     <Container maxWidth="lg">
       <Grid container direction="column" sx={{ paddingTop: "1rem" }}>
@@ -25,30 +27,19 @@ export const TicketPage = () => {
           </Button>
         </Grid>
         <Grid item>
-          <CardTiket
-            state="new"
-            title="Problemas con proyector 2bb"
-            user="Yerson Reyes"
-            date="28/05/2022"
-            description="el cable del proyector esta cortano no funciona como corresponde"
-            id="aaaa"
-          />
-          <CardTiket
-            state="new"
-            title="Problemas con proyector 2bb"
-            user="Yerson Reyes"
-            date="28/05/2022"
-            description="el cable del proyector esta cortano no funciona como corresponde"
-            id="aaaa"
-          />
-          <CardTiket
-            state="new"
-            title="Problemas con proyector 2bb"
-            user="Yerson Reyes"
-            date="28/05/2022"
-            description="el cable del proyector esta cortano no funciona como corresponde"
-            id="aaaa"
-          />
+          {tickets.map(
+            ({ state, title, userName, created, description, id }) => (
+              <CardTiket
+                key={id}
+                state={state}
+                title={title}
+                user={userName}
+                date={created}
+                description={description}
+                id={id}
+              />
+            )
+          )}
         </Grid>
       </Grid>
     </Container>
