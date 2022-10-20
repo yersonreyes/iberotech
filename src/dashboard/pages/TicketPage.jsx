@@ -1,12 +1,20 @@
 import { Button, Container, Grid } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { startGetTickets } from "../../store/ticket/thunks";
 
 import { CardTiket } from "../components/CardTiket";
 
-export const TiketPage = () => {
+export const TicketPage = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(startGetTickets());
+  }, []);
+
   const navigate = useNavigate();
   const onNavigate = () => {
-    navigate(`/tiket/new`);
+    navigate(`/ticket/new`);
   };
   return (
     <Container maxWidth="lg">

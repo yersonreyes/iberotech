@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { date } from "../../helpers/getDate";
 import { useForm } from "../../hooks/useForm";
-import { startAddNewTiket } from "../../store/tiket/thunks";
+import { startAddNewTiket } from "../../store/ticket/thunks";
 
-export const TiketNewPage = () => {
+export const TicketNewPage = () => {
   const { email, displayName } = useSelector((state) => state.auth);
 
   const initalState = {
@@ -24,12 +24,13 @@ export const TiketNewPage = () => {
   const dispatch = useDispatch();
 
   const onNavigate = () => {
-    navigate("/tiket");
+    navigate("/ticket");
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(startAddNewTiket(formState));
+    onNavigate("/ticket");
   };
   return (
     <Container maxWidth="lg">

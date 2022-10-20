@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 export const CardTiket = ({ state, title, date, description, user, id }) => {
   const navigate = useNavigate();
   const onNavigate = (nav) => {
-    navigate(`/tiket/${nav}`);
+    navigate(`/ticket/${nav}`);
   };
   return (
     <Card sx={{ Width: "100%", marginTop: "1rem" }}>

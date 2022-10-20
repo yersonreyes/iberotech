@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../store/auth/thunks";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["tiket", "host", "dashboard"];
+const pages = ["ticket", "host", "dashboard"];
 
 export const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);

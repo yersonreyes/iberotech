@@ -1,5 +1,5 @@
-import { addNewTiket } from "../../firebase/providerDB";
-import { tikets } from "./tiketSlice";
+import { addNewTiket, getTickets } from "../../firebase/providerDB";
+import { tickets } from "./ticketSlice";
 
 export const startGetTikets = () => {
   return async (dispatch) => {};
@@ -8,12 +8,12 @@ export const startGetTikets = () => {
 export const startAddNewTiket = (formState) => {
   return async (dispatch) => {
     await addNewTiket(formState);
-    console.log(formState);
   };
 };
 
-export const gestTickets = () => {
+export const startGetTickets = () => {
   return async (dispatch) => {
-    console.log("ticket obtenidos");
+    const resp = await getTickets();
+    dispatch(tickets(resp));
   };
 };
