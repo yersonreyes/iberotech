@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   Grid,
@@ -11,7 +12,9 @@ import {
 import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { UpdatedStateTicket } from "../../firebase/providerDB";
+import { useForm } from "../../hooks/useForm";
 import { MessageItem } from "../components/MessageItem";
 
 export const TicketIdPage = () => {
@@ -19,12 +22,24 @@ export const TicketIdPage = () => {
   const [threadList, setThreadList] = useState([]);
   const tickets = useSelector((state) => state.ticket.tickets);
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const result = tickets.filter((item) => item.id === params.id);
     setTicket(result[0]);
     setThreadList(result[0].thread);
   }, []);
+
+  const { newState, onInputChange } = useForm({ newState: "new" });
+
+  const onNavigate = () => {
+    navigate(`/ticket`);
+  };
+
+  const updated = () => {
+    UpdatedStateTicket(params.id, newState);
+    navigate(`/ticket`);
+  };
 
   return (
     <Container maxWidth="lg">
@@ -59,15 +74,37 @@ export const TicketIdPage = () => {
             </Grid>
 
             <Grid item>
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+              <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Estado</InputLabel>
-                <Select labelId="demo-simple-select-label">
-                  <MenuItem value={10}>Nuevo ticket</MenuItem>
-                  <MenuItem value={20}>Revisando</MenuItem>
-                  <MenuItem value={30}>Terminado</MenuItem>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={newState}
+                  label="Estado"
+                  name="newState"
+                  onChange={onInputChange}
+                >
+                  <MenuItem value={"new"}>Tiket NUevo </MenuItem>
+                  <MenuItem value={"approved"}>Tiket resuelto</MenuItem>
+                  <MenuItem value={"process"}>Tiket en revision</MenuItem>
+                  <MenuItem value={"error"}>Tiket con problemas</MenuItem>
                 </Select>
-
-                <Button>Actualizar</Button>
+                <Box sx={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+                  <Button
+                    onClick={updated}
+                    sx={{ width: "50%" }}
+                    variant="contained"
+                  >
+                    Actualizar
+                  </Button>
+                  <Button
+                    onClick={onNavigate}
+                    sx={{ width: "50%" }}
+                    variant="outlined"
+                  >
+                    Volver
+                  </Button>
+                </Box>
               </FormControl>
             </Grid>
           </Grid>
@@ -85,8 +122,9 @@ export const TicketIdPage = () => {
                   bgcolor: "background.paper",
                 }}
               >
-                {threadList.map((message) => (
+                {threadList.map((message, index) => (
                   <MessageItem
+                    key={index}
                     userName={message.userName}
                     email={message.email}
                     photoUrl={message.userName}

@@ -17,3 +17,8 @@ export const getTickets = async () => {
   });
   return tickets;
 };
+
+export const UpdatedStateTicket = async (id, newState) => {
+  const newDoc = doc(FirebaseDB, `tickets/${id}`);
+  await setDoc(newDoc, { state: newState }, { merge: true });
+};
