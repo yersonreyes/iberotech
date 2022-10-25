@@ -22,3 +22,8 @@ export const UpdatedStateTicket = async (id, newState) => {
   const newDoc = doc(FirebaseDB, `tickets/${id}`);
   await setDoc(newDoc, { state: newState }, { merge: true });
 };
+
+export const sendNewMessage = async (id, newThread) => {
+  const newDoc = doc(FirebaseDB, `tickets/${id}`);
+  await setDoc(newDoc, { thread: newThread }, { merge: true });
+};
