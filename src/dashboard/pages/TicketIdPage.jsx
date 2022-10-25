@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { UpdatedStateTicket } from "../../firebase/providerDB";
 import { useForm } from "../../hooks/useForm";
+import { DescriptionTicket } from "../components/DescriptionTicket";
 import { MessageItem } from "../components/MessageItem";
 
 export const TicketIdPage = () => {
@@ -50,28 +51,12 @@ export const TicketIdPage = () => {
             direction="column"
             sx={{ paddingTop: "1rem", gap: "1rem" }}
           >
-            <Grid item>
-              <Typography variant="h4">{ticket.title}</Typography>
-            </Grid>
-            <Grid
-              item
-              sx={{
-                display: "flex",
-                gap: "0.5rem",
-                transform: "translate(0px, -8px) ",
-              }}
-            >
-              <Typography variant="body2">
-                Creado por: {ticket.userName}
-              </Typography>
-              <Typography variant="body2">{ticket.created}</Typography>
-            </Grid>
-
-            <Grid item>
-              <Typography variant="body1">
-                Descripcion: {ticket.description}
-              </Typography>
-            </Grid>
+            <DescriptionTicket
+              title={ticket.title}
+              userName={ticket.userName}
+              created={ticket.created}
+              description={ticket.description}
+            />
 
             <Grid item>
               <FormControl fullWidth>
@@ -133,6 +118,7 @@ export const TicketIdPage = () => {
                 ))}
               </List>
             </Grid>
+            <Grid item>HOla</Grid>
           </Grid>
         </Grid>
       </Grid>
