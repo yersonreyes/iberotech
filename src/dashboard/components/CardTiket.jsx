@@ -17,13 +17,13 @@ export const CardTiket = ({ state, title, date, description, user, id }) => {
   return (
     <Card sx={{ Width: "100%", marginTop: "1rem" }}>
       {state === "new" ? (
-        <Alert severity="warning">Nuevo tiket ingresado</Alert>
+        <Alert severity="warning">Nuevo ticket ingresado</Alert>
       ) : state === "error" ? (
-        <Alert severity="error">Tiket con problemas</Alert>
+        <Alert severity="error">Ticket con problemas</Alert>
       ) : state === "process" ? (
-        <Alert severity="info">Tiket en revision</Alert>
+        <Alert severity="info">Ticket en revision</Alert>
       ) : state === "approved" ? (
-        <Alert severity="success">Tiket resuelto</Alert>
+        <Alert severity="success">Ticket resuelto</Alert>
       ) : (
         <></>
       )}

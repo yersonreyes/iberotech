@@ -4,8 +4,8 @@ export const date = () => {
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
   if (month < 10) {
-    return `${day}-0${month}-${year}`;
+    return `${year}-0${month}-${day}`;
   } else {
-    return `${day}-${month}-${year}`;
+    return `${year}-${month}-${day}`;
   }
 };
