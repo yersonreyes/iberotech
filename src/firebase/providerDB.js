@@ -1,5 +1,23 @@
-import { collection, doc, getDocs, setDoc } from "firebase/firestore/lite";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore/lite";
 import { FirebaseDB } from "./config";
+
+export const getRol = async (id) => {
+  const rolDoc = doc(FirebaseDB, `user/${id}`);
+  const rol = await getDoc(rolDoc);
+  return rol.data();
+};
+
+export const newRol = async (id) => {
+  setDoc(doc(FirebaseDB, "user", id), {
+    rol: "user",
+  });
+};
 
 export const addNewTiket = async (newTicket) => {
   const newDoc = doc(collection(FirebaseDB, `/tickets`));

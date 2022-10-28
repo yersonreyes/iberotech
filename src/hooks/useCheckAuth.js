@@ -2,6 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FirebaseAuth } from "../firebase/config";
+import { getRol } from "../firebase/providerDB";
 import { login, logout } from "../store/auth/authSlice";
 
 export const useCheckAuth = () => {
@@ -12,7 +13,8 @@ export const useCheckAuth = () => {
     onAuthStateChanged(FirebaseAuth, async (user) => {
       if (!user) return dispatch(logout());
       const { uid, email, displayName, photoURL } = user;
-      dispatch(login({ uid, email, displayName, photoURL }));
+      const { rol } = await getRol(email);
+      dispatch(login({ uid, email, displayName, photoURL, rol }));
     });
   }, []);
 

@@ -4,6 +4,7 @@ import {
   registerUserWithEmailPassword,
   singInWithGoogle,
 } from "../../firebase/provider";
+import { getRol, newRol } from "../../firebase/providerDB";
 import { checkingCredentials, login, logout } from "./authSlice";
 
 export const startGoogleSingIn = () => {
@@ -11,7 +12,13 @@ export const startGoogleSingIn = () => {
     dispatch(checkingCredentials());
     const result = await singInWithGoogle();
     if (!result.ok) return dispatch(logout(result.errorMesage));
-    dispatch(login(result));
+    const rol = await getRol(result.email);
+    if (rol === undefined) {
+      await newRol(result.email);
+      dispatch(login({ ...result, rol: "user" }));
+      return;
+    }
+    dispatch(login({ ...result, ...rol }));
   };
 };
 
@@ -20,7 +27,8 @@ export const startLoginWithEmailPassword = ({ email, password }) => {
     dispatch(checkingCredentials());
     const result = await loginWithEmailPassword({ email, password });
     if (!result.ok) return dispatch(logout(result.errorMesage));
-    dispatch(login(result));
+    const rol = await getRol(result.email);
+    dispatch(login({ ...result, ...rol }));
   };
 };
 
@@ -38,7 +46,8 @@ export const startCreatingUserWithEmailPassword = ({
       displayName,
     });
     if (!result.ok) return dispatch(logout(result.errorMesage));
-    dispatch(login(result));
+    await newRol(result.email);
+    dispatch(login({ ...result, rol: "user" }));
   };
 };
 

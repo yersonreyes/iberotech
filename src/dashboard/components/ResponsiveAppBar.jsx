@@ -180,7 +180,12 @@ export const ResponsiveAppBar = () => {
               onClose={handleCloseUserMenu}
             >
               <MenuItem>
-                <Typography textAlign="center">Perfil</Typography>
+                <Typography
+                  onClick={() => onNavigate("user")}
+                  textAlign="center"
+                >
+                  Perfil
+                </Typography>
               </MenuItem>
 
               <MenuItem onClick={onLogout}>
