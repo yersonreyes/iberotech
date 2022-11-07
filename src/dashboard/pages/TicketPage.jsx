@@ -40,8 +40,16 @@ export const TicketPage = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Grid container direction="column" sx={{ paddingTop: "1rem" }}>
+    <Container
+      className="box-shadow animate__animated animate__fadeIn animate__faster"
+      maxWidth="lg"
+    >
+      <Grid
+        className="box-shadow animate__animated animate__fadeIn animate__faster"
+        container
+        direction="column"
+        sx={{ paddingTop: "1rem" }}
+      >
         <Grid item>
           <Button onClick={() => onNavigate()} variant="contained">
             Ingresar nuevo Ticket

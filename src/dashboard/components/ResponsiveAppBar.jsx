@@ -16,7 +16,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../store/auth/thunks";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["ticket", "host", "dashboard"];
+const pages = [
+  { name: "inicio", rute: "dashboard", acces: "operator" },
+  { name: "ticket", rute: "ticket", acces: "operator" },
+  { name: "equipos", rute: "host", acces: "operator" },
+  { name: "usuarios", rute: "usersconfig", acces: "operator" },
+];
 
 export const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -102,12 +107,12 @@ export const ResponsiveAppBar = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page}>
+                <MenuItem key={page.name}>
                   <Typography
-                    onClick={() => onNavigate(page)}
+                    onClick={() => onNavigate(page.rute)}
                     textAlign="center"
                   >
-                    {page}
+                    {page.name}
                   </Typography>
                 </MenuItem>
               ))}
@@ -134,11 +139,11 @@ export const ResponsiveAppBar = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={() => onNavigate(page)}
+                key={page.name}
+                onClick={() => onNavigate(page.rute)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>

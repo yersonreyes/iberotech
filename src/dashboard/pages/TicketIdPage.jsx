@@ -21,7 +21,10 @@ export const TicketIdPage = () => {
   }, []);
 
   return (
-    <Container maxWidth="lg">
+    <Container
+      className="box-shadow animate__animated animate__fadeIn animate__faster"
+      maxWidth="lg"
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Grid

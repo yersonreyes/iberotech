@@ -33,7 +33,10 @@ export const TicketNewPage = () => {
     onNavigate("/ticket");
   };
   return (
-    <Container maxWidth="lg">
+    <Container
+      className="box-shadow animate__animated animate__fadeIn animate__faster"
+      maxWidth="lg"
+    >
       <Typography variant="h3" sx={{ paddingTop: "1rem" }}>
         Ingresa tu tiket
       </Typography>
