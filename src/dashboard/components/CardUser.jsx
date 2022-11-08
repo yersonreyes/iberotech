@@ -38,31 +38,35 @@ export const CardUser = ({ user }) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <FormControl fullWidth>
-            {disableButton ? (
-              <></>
-            ) : (
-              <>
-                <InputLabel id="demo-simple-select-label">Rol</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  name="newRol"
-                  value={newRol}
-                  label="Rol"
-                  onChange={onInputChange}
-                >
-                  <MenuItem value={"user"}>User</MenuItem>
-                  <MenuItem value={"operador"}>Operador</MenuItem>
-                  <MenuItem value={"admin"}>Admin</MenuItem>
-                </Select>
-              </>
-            )}
+          {user.rol === "admin" ? (
+            <></>
+          ) : (
+            <FormControl fullWidth>
+              {disableButton ? (
+                <></>
+              ) : (
+                <>
+                  <InputLabel id="demo-simple-select-label">Rol</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="newRol"
+                    value={newRol}
+                    label="Rol"
+                    onChange={onInputChange}
+                  >
+                    <MenuItem value={"user"}>User</MenuItem>
+                    <MenuItem value={"operador"}>Operador</MenuItem>
+                    <MenuItem value={"admin"}>Admin</MenuItem>
+                  </Select>
+                </>
+              )}
 
-            <Button disabled={disableButton} onClick={onChangeRol}>
-              {disableButton ? "ROl cambiado con exito" : "Cambiar ROl"}
-            </Button>
-          </FormControl>
+              <Button disabled={disableButton} onClick={onChangeRol}>
+                {disableButton ? "ROl cambiado con exito" : "Cambiar ROl"}
+              </Button>
+            </FormControl>
+          )}
         </CardActions>
       </Card>
     </Grid>
