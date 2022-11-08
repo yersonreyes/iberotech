@@ -14,7 +14,7 @@ export const startGoogleSingIn = () => {
     if (!result.ok) return dispatch(logout(result.errorMesage));
     const rol = await getRol(result.email);
     if (rol === undefined) {
-      await newRol(result.email);
+      await newRol(result.email, result.displayName);
       dispatch(login({ ...result, rol: "user" }));
       return;
     }
@@ -46,7 +46,7 @@ export const startCreatingUserWithEmailPassword = ({
       displayName,
     });
     if (!result.ok) return dispatch(logout(result.errorMesage));
-    await newRol(result.email);
+    await newRol(result.email, result.displayName);
     dispatch(login({ ...result, rol: "user" }));
   };
 };

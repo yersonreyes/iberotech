@@ -13,9 +13,10 @@ export const getRol = async (id) => {
   return rol.data();
 };
 
-export const newRol = async (id) => {
+export const newRol = async (id, userName) => {
   setDoc(doc(FirebaseDB, "user", id), {
     rol: "user",
+    userName,
   });
 };
 
@@ -34,6 +35,23 @@ export const getTickets = async () => {
     });
   });
   return tickets;
+};
+
+export const getUsers = async () => {
+  const users = [];
+  await getDocs(collection(FirebaseDB, `/user`)).then((res) => {
+    res.forEach((doc) => {
+      let user = doc.data();
+      user.id = doc.id;
+      users.push(user);
+    });
+  });
+  return users;
+};
+
+export const changeRol = async (id, newRol) => {
+  const newDoc = doc(FirebaseDB, `user/${id}`);
+  await setDoc(newDoc, { rol: newRol }, { merge: true });
 };
 
 export const UpdatedStateTicket = async (id, newState) => {

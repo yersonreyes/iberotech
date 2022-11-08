@@ -31,7 +31,8 @@ export const TicketPage = () => {
     const data = tickets.filter((ticket) => {
       return ticket.state === filter;
     });
-    setTicketsList(data);
+    const newdata = data.slice().sort(compare).reverse();
+    setTicketsList(newdata);
   };
 
   const noneFIlter = () => {
