@@ -17,17 +17,17 @@ import { startLogout } from "../../store/auth/thunks";
 import { useNavigate } from "react-router-dom";
 
 const pages = [
-  { name: "inicio", rute: "dashboard", acces: "operator" },
-  { name: "ticket", rute: "ticket", acces: "operator" },
-  { name: "equipos", rute: "host", acces: "operator" },
-  { name: "usuarios", rute: "usersconfig", acces: "operator" },
+  { name: "inicio", rute: "dashboard", acces: "operador" },
+  { name: "ticket", rute: "ticket", acces: "operador" },
+  { name: "equipos", rute: "host", acces: "admin" },
+  { name: "usuarios", rute: "usersconfig", acces: "admin" },
 ];
 
 export const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const { status, uid, email, displayName, photoURL } = useSelector(
+  const { status, uid, email, displayName, photoURL, rol } = useSelector(
     (state) => state.auth
   );
   const dispatch = useDispatch();
@@ -106,16 +106,20 @@ export const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page.name}>
-                  <Typography
-                    onClick={() => onNavigate(page.rute)}
-                    textAlign="center"
-                  >
-                    {page.name}
-                  </Typography>
-                </MenuItem>
-              ))}
+              {pages.map((page) =>
+                rol === "admin" || rol === page.acces ? (
+                  <MenuItem key={page.name}>
+                    <Typography
+                      onClick={() => onNavigate(page.rute)}
+                      textAlign="center"
+                    >
+                      {page.name}
+                    </Typography>
+                  </MenuItem>
+                ) : (
+                  <></>
+                )
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -137,15 +141,19 @@ export const ResponsiveAppBar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={() => onNavigate(page.rute)}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page.name}
-              </Button>
-            ))}
+            {pages.map((page) =>
+              rol === "admin" || rol === page.acces ? (
+                <Button
+                  key={page.name}
+                  onClick={() => onNavigate(page.rute)}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page.name}
+                </Button>
+              ) : (
+                <></>
+              )
+            )}
           </Box>
 
           <Box

@@ -11,13 +11,23 @@ export const TicketPage = () => {
   useEffect(() => {
     dispatch(startGetTickets());
   }, []);
-
+  const { rol, email } = useSelector((state) => state.auth);
   const tickets = useSelector((state) => state.ticket.tickets);
   const [ticketsList, setTicketsList] = useState([]);
 
   useEffect(() => {
-    const newData = tickets.slice().sort(compare);
-    setTicketsList(newData.reverse());
+    if (rol === "admin") {
+      const newData = tickets.slice().sort(compare);
+      setTicketsList(newData.reverse());
+    } else {
+      const newData = tickets
+        .slice()
+        .sort(compare)
+        .filter((tik) => {
+          return tik.email === email;
+        });
+      setTicketsList(newData.reverse());
+    }
   }, [tickets]);
 
   const dispatch = useDispatch();
@@ -28,16 +38,34 @@ export const TicketPage = () => {
   };
 
   const filterByState = (filter) => {
-    const data = tickets.filter((ticket) => {
-      return ticket.state === filter;
-    });
-    const newdata = data.slice().sort(compare).reverse();
-    setTicketsList(newdata);
+    if (rol === "admin") {
+      const data = tickets.filter((ticket) => {
+        return ticket.state === filter;
+      });
+      const newdata = data.slice().sort(compare).reverse();
+      setTicketsList(newdata);
+    } else {
+      const data = tickets.filter((ticket) => {
+        return ticket.state === filter && ticket.email === email;
+      });
+      const newdata = data.slice().sort(compare).reverse();
+      setTicketsList(newdata);
+    }
   };
 
   const noneFIlter = () => {
-    const newData = tickets.slice().sort(compare);
-    setTicketsList(newData.reverse());
+    if (rol === "admin") {
+      const newData = tickets.slice().sort(compare);
+      setTicketsList(newData.reverse());
+    } else {
+      const newData = tickets
+        .slice()
+        .sort(compare)
+        .filter((tik) => {
+          return tik.email === email;
+        });
+      setTicketsList(newData.reverse());
+    }
   };
 
   return (

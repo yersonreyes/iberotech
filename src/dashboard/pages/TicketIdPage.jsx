@@ -38,7 +38,6 @@ export const TicketIdPage = () => {
               created={ticket.created}
               description={ticket.description}
             />
-
             <ChangeTiketState id={params.id} ticketState={ticket.state} />
           </Grid>
         </Grid>
