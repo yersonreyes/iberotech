@@ -3,6 +3,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { ResponsiveAppBar } from "../components/ResponsiveAppBar";
 import { AccesDenegate } from "../pages/AccesDenegate";
 import { DashboardPages } from "../pages/DashboardPages";
+import { HostIdPage } from "../pages/HostIdPage";
+import { HostNewPage } from "../pages/HostNewPage";
 import { HostPages } from "../pages/HostPages";
 import { TicketIdPage } from "../pages/TicketIdPage";
 import { TicketNewPage } from "../pages/TicketNewPage";
@@ -26,6 +28,8 @@ export const DashboardRoutes = () => {
             <Route path="/" element={<DashboardPages />} />
             <Route path="/dashboard" element={<DashboardPages />} />
             <Route path="/host" element={<HostPages />} />
+            <Route path="/host/new" element={<HostNewPage />} />
+            <Route path="/host/:id" element={<HostIdPage />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/usersconfig" element={<UsersConfig />} />
             <Route path="/ticket" element={<TicketPage />} />
