@@ -37,6 +37,23 @@ export const getTickets = async () => {
   return tickets;
 };
 
+export const getHosts = async () => {
+  const hosts = [];
+  await getDocs(collection(FirebaseDB, `/hosts`)).then((res) => {
+    res.forEach((doc) => {
+      let host = doc.data();
+      host.id = doc.id;
+      hosts.push(host);
+    });
+  });
+  return hosts;
+};
+
+export const addNewHost = async (newHost) => {
+  const newDoc = doc(collection(FirebaseDB, `/hosts`));
+  await setDoc(newDoc, newHost);
+};
+
 export const getUsers = async () => {
   const users = [];
   await getDocs(collection(FirebaseDB, `/user`)).then((res) => {

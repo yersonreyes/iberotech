@@ -1,13 +1,22 @@
 import { Button, Container, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { TableHost } from "../components/TableHost";
+import { useEffect } from "react";
+import { startGetHosts } from "../../store/host/thunks";
+import { useDispatch } from "react-redux";
 
 export const HostPages = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(startGetHosts());
+  }, []);
 
   const onNavigate = () => {
     navigate(`/host/new`);
   };
+
   return (
     <Container
       className="box-shadow animate__animated animate__fadeIn animate__faster"
