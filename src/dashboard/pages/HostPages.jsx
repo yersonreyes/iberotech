@@ -18,7 +18,6 @@ export const HostPages = () => {
     navigate(`/host/new`);
   };
 
-  console.log(hosts);
   return (
     <Container
       className="box-shadow animate__animated animate__fadeIn animate__faster"
