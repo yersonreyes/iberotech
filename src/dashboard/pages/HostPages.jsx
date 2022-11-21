@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { TableHost } from "../components/TableHost";
 import { useEffect } from "react";
 import { startGetHosts } from "../../store/host/thunks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const HostPages = () => {
+  const hosts = useSelector((state) => state.host.hosts);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,6 +18,7 @@ export const HostPages = () => {
     navigate(`/host/new`);
   };
 
+  console.log(hosts);
   return (
     <Container
       className="box-shadow animate__animated animate__fadeIn animate__faster"
@@ -35,7 +37,7 @@ export const HostPages = () => {
           </Button>
         </Grid>
         <Grid>
-          <TableHost />
+          <TableHost hosts={hosts} />
         </Grid>
       </Grid>
     </Container>

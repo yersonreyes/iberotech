@@ -17,20 +17,21 @@ import { addNewHost } from "../../firebase/providerDB";
 
 export const HostNewPage = () => {
   const {
+    marca,
     date,
-    user,
     ubicacion,
     proce,
     macEthernet,
     macWifi,
     serie,
     tipo,
-    name,
     model,
     ram,
+    state,
     almacenamiento,
     onInputChange,
   } = useForm({
+    marca: "",
     date: dateFunction(),
     user: "",
     ubicacion: "",
@@ -38,11 +39,11 @@ export const HostNewPage = () => {
     macEthernet: "",
     macWifi: "",
     serie: "",
-    tipo: "",
-    name: "",
+    tipo: "Notebook",
     model: "",
     ram: "",
     almacenamiento: "",
+    state: "operativo",
   });
 
   const navigate = useNavigate();
@@ -53,20 +54,21 @@ export const HostNewPage = () => {
 
   const startAddNewHost = () => {
     addNewHost({
+      marca,
       date,
-      user,
+      user: [],
       ubicacion,
       proce,
       macEthernet,
       macWifi,
       serie,
       tipo,
-      name,
       model,
       ram,
       almacenamiento,
       description: "",
-      observaciones: "",
+      observaciones: [],
+      state,
     });
     navigate(`/host`);
   };
@@ -84,19 +86,19 @@ export const HostNewPage = () => {
         <Grid item xs={12} md={6}>
           <FormControl fullWidth>
             <TextField
-              label="Nombre"
-              variant="standard"
-              sx={{ marginTop: "1rem" }}
-              name="name"
-              value={name}
-              onChange={onInputChange}
-            />
-            <TextField
               label="Modelo"
               variant="standard"
               sx={{ marginTop: "1rem" }}
               name="model"
               value={model}
+              onChange={onInputChange}
+            />
+            <TextField
+              label="Marca"
+              variant="standard"
+              sx={{ marginTop: "1rem" }}
+              name="marca"
+              value={marca}
               onChange={onInputChange}
             />
             <TextField
@@ -109,16 +111,7 @@ export const HostNewPage = () => {
             />
 
             <TextField
-              label="Usuario"
-              variant="standard"
-              sx={{ marginTop: "1rem" }}
-              name="user"
-              value={user}
-              onChange={onInputChange}
-            />
-
-            <TextField
-              label="ubicacion"
+              label="Ubicacion"
               variant="standard"
               sx={{ marginTop: "1rem" }}
               name="ubicacion"
@@ -139,6 +132,21 @@ export const HostNewPage = () => {
               <MenuItem value={"Notebook"}>Notebook</MenuItem>
               <MenuItem value={"Desktop"}>Desktop</MenuItem>
               <MenuItem value={"All in one"}>All in one</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ marginTop: "1rem" }} variant="standard" fullWidth>
+            <InputLabel id="selectLabelState">Tipo</InputLabel>
+            <Select
+              labelId="selectLabelState"
+              id="selectState"
+              value={state}
+              label="Estado"
+              name="state"
+              onChange={onInputChange}
+            >
+              <MenuItem value={"operativo"}>Operativo</MenuItem>
+              <MenuItem value={"Defectuoso"}>Defectuoso</MenuItem>
+              <MenuItem value={"Perdido"}>Perdido</MenuItem>
             </Select>
           </FormControl>
           <FormControl sx={{ marginTop: "1rem" }} variant="standard" fullWidth>
