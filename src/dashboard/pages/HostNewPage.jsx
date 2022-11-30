@@ -69,6 +69,7 @@ export const HostNewPage = () => {
       description: "",
       observaciones: [],
       state,
+      activeUser: "",
     });
     navigate(`/host`);
   };

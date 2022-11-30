@@ -13,6 +13,7 @@ export const NewDescription = ({ setHost, host }) => {
       ...host,
       observaciones: [{ date, observacion }, ...host.observaciones],
     });
+    onResetForm();
   };
   return (
     <>

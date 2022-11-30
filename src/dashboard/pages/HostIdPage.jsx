@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { updateHost } from "../../firebase/providerDB";
 import { HostDescription } from "../components/HostDescription";
 import { HostState } from "../components/HostState";
 import { NewDescription } from "../components/NewDescription";
@@ -25,6 +26,29 @@ export const HostIdPage = () => {
     navigate(`/host`);
   };
 
+  const saveHost = async () => {
+    const data = {
+      almacenamiento: host.almacenamiento,
+      date: host.date,
+      description: host.description,
+      macEthernet: host.macEthernet,
+      macWifi: host.macWifi,
+      marca: host.marca,
+      model: host.model,
+      proce: host.proce,
+      ram: host.ram,
+      serie: host.serie,
+      state: host.state,
+      tipo: host.tipo,
+      ubicacion: host.ubicacion,
+      user: host.user,
+      activeUser: host.user[0].userName,
+      observaciones: host.observaciones,
+    };
+    console.log(data);
+    await updateHost(host.id, data);
+    navigate(`/host`);
+  };
   return (
     <Container
       className="box-shadow animate__animated animate__fadeIn animate__faster"
@@ -70,7 +94,9 @@ export const HostIdPage = () => {
         <Button onClick={onNavigate} variant="outlined">
           Volver
         </Button>
-        <Button variant="contained">Guardar cambios </Button>
+        <Button onClick={saveHost} variant="contained">
+          Guardar cambios{" "}
+        </Button>
       </Box>
     </Container>
   );

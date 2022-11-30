@@ -68,7 +68,7 @@ export function TableHost({ hosts }) {
                 sx={{ display: { xs: "none", md: "table-cell" } }}
                 align="right"
               >
-                {item.user}
+                {item.activeUser}
               </TableCell>
               <TableCell
                 sx={{ display: { xs: "none", md: "table-cell" } }}

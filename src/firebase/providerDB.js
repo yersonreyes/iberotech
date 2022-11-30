@@ -54,6 +54,11 @@ export const addNewHost = async (newHost) => {
   await setDoc(newDoc, newHost);
 };
 
+export const updateHost = async (id, data) => {
+  const newDoc = doc(FirebaseDB, `hosts/${id}`);
+  await setDoc(newDoc, data, { merge: true });
+};
+
 export const getUsers = async () => {
   const users = [];
   await getDocs(collection(FirebaseDB, `/user`)).then((res) => {
