@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { HostDescription } from "../components/HostDescription";
 import { HostState } from "../components/HostState";
 import { PopUp } from "../components/PopUp";
 import { UserAcordion } from "../components/UserAcordion";
@@ -58,6 +59,9 @@ export const HostIdPage = () => {
 
         <Grid item xs={12} md={6}>
           <Typography variant="h6">Observaciones</Typography>
+          <HostDescription
+            observaciones={host.observaciones ? host.observaciones : []}
+          />
         </Grid>
       </Grid>
       <Box sx={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
