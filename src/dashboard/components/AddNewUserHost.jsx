@@ -53,7 +53,7 @@ export const AddNewUserHost = ({ setOpen, host, setHost }) => {
       userName,
       newDate,
     };
-    setHost({ ...host, user: [...host.user, data] });
+    setHost({ ...host, user: [data, ...host.user] });
     setOpen(false);
   };
   return (

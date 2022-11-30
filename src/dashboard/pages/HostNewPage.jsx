@@ -135,7 +135,7 @@ export const HostNewPage = () => {
             </Select>
           </FormControl>
           <FormControl sx={{ marginTop: "1rem" }} variant="standard" fullWidth>
-            <InputLabel id="selectLabelState">Tipo</InputLabel>
+            <InputLabel id="selectLabelState">Estado</InputLabel>
             <Select
               labelId="selectLabelState"
               id="selectState"
