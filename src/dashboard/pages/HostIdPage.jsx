@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { HostDescription } from "../components/HostDescription";
 import { HostState } from "../components/HostState";
+import { NewDescription } from "../components/NewDescription";
 import { PopUp } from "../components/PopUp";
 import { UserAcordion } from "../components/UserAcordion";
 
@@ -62,6 +63,7 @@ export const HostIdPage = () => {
           <HostDescription
             observaciones={host.observaciones ? host.observaciones : []}
           />
+          <NewDescription setHost={setHost} host={host} />
         </Grid>
       </Grid>
       <Box sx={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>

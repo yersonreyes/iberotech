@@ -7,7 +7,7 @@ export const HostDescription = ({ observaciones }) => {
       {observaciones.map((item) => (
         <Box>
           <Typography variant="caption">Fecha: {item.date}</Typography>
-          <Typography variant="body1">{item.text}</Typography>
+          <Typography variant="body1">{item.observacion}</Typography>
           <Divider sx={{ marginTop: "1rem", marginBottom: "1rem" }} />
         </Box>
       ))}
