@@ -78,8 +78,9 @@ export const HostIdPage = () => {
           <HostState setHost={setHost} host={host} />
           <Divider sx={{ marginTop: "1rem", marginBottom: "1rem" }} />
           <Typography variant="h6"> Usuarios </Typography>
-          <PopUp setHost={setHost} host={host} />
+
           {host.user ? <UserAcordion users={host.user} /> : <></>}
+          <PopUp setHost={setHost} host={host} />
         </Grid>
 
         <Grid item xs={12} md={6}>
@@ -90,7 +91,14 @@ export const HostIdPage = () => {
           <NewDescription setHost={setHost} host={host} />
         </Grid>
       </Grid>
-      <Box sx={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "1rem",
+          marginTop: "1rem",
+          marginBottom: "1rem",
+        }}
+      >
         <Button onClick={onNavigate} variant="outlined">
           Volver
         </Button>

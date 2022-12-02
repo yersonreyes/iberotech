@@ -23,7 +23,13 @@ export function PopUp({ host, setHost }) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Asignar equipo a un nuevo usuario</Button>
+      <Button
+        sx={{ marginTop: "1rem" }}
+        variant="contained"
+        onClick={handleOpen}
+      >
+        Asignar equipo a un nuevo usuario
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}

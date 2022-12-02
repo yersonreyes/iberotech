@@ -17,7 +17,7 @@ export const NewDescription = ({ setHost, host }) => {
   };
   return (
     <>
-      <Typography>Agrega una nueva observacion</Typography>
+      <Typography variant="h6"> Agrega una nueva observacion</Typography>
       <FormControl fullWidth variant="standard">
         <TextField
           id="standard-basic"
