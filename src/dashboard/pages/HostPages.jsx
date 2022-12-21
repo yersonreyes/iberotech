@@ -21,7 +21,7 @@ export const HostPages = () => {
     setHostfiltered(hosts);
   }, [hosts]);
 
-  const filtrado = () => {
+  const filterByName = () => {
     const data = hosts.filter((item) => item.activeUser.includes("ger"));
     setHostfiltered(data);
   };
